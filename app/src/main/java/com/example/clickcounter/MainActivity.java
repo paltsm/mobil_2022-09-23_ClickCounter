@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,10 +36,15 @@ public class MainActivity extends AppCompatActivity {
 			szin(ertek);
 
 		});
-		textviewErtek.setOnClickListener(view -> {
-			int ertek=0;
-			textviewErtek.setText(String.valueOf(ertek));
-			szin(ertek);
+
+		textviewErtek.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View view) {
+				int ertek=0;
+				textviewErtek.setText(String.valueOf(ertek));
+				szin(ertek);
+				return true;
+			}
 		});
 
 	}
@@ -58,5 +64,16 @@ public class MainActivity extends AppCompatActivity {
 		}else{
 			textviewErtek.setTextColor(Color.GREEN);
 		}
+		if(prim(ertek) && ertek>1){
+			textviewErtek.setTextColor(Color.rgb(255,255,255));
+		}
+	}
+	private boolean prim(int ertek){
+		for (int i = 2; i < ertek; i++) {
+			if (ertek%i==0){
+				return false;
+			}
+		}
+		return true;
 	}
 }
